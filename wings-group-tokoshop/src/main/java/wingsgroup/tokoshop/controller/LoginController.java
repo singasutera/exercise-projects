@@ -17,41 +17,67 @@ import wingsgroup.tokoshop.service.LoginSvc;
 @Controller
 @RequestMapping("user")
 public class LoginController {
-	
+
 	@Autowired
 	LoginSvc loginSvc;
-	
+
 	@RequestMapping("login")
-	public String login(Model model, HttpServletRequest request){
+	public String login(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		LoginDto dto = new LoginDto();
-		model.addAttribute("userattr", dto);	
+		model.addAttribute("userattr", dto);
 		session.removeAttribute("loginOK");
 		return "login";
 	}
-	
+
+//	@RequestMapping("checkLogin")
+//	public String checkLogin(
+//			@Valid @ModelAttribute("userattr") LoginDto dtoLogin, BindingResult result,
+//			Model model,
+//			HttpServletRequest request) {
+//		
+//		HttpSession session = request.getSession();
+//		
+//		try {
+//			if (result.hasErrors()) {
+//				return "login";
+//			} else {
+//				LoginDto findUser = loginSvc.findByUsernameAndPassword(dtoLogin.getUsername(), dtoLogin.getPassword());
+//				System.err.println(findUser.getUsername());
+//				session.setAttribute("loginOK", findUser);
+//				session.setMaxInactiveInterval(30 * 60);
+//				return "home";
+//			}
+//		} catch (NullPointerException e) {
+//			String message = "Username atau Password Salah.";
+//			model.addAttribute("message", message);
+//			return "hello";
+//		}
+//	}
+
 	@RequestMapping("checkLogin")
-	public String checkLogin(@Valid @ModelAttribute("userattr") LoginDto dtoLogin, BindingResult result, 
-			Model model, HttpServletRequest request){
+	public String checkLogin(@Valid @ModelAttribute("userattr") LoginDto dtoLogin, BindingResult result, Model model,
+			HttpServletRequest request) {
+
 		HttpSession session = request.getSession();
-		if(result.hasErrors()){
+
+		if (result.hasErrors()) {
 			return "login";
 		} else {
-			LoginDto findUser = loginSvc.findByUsernameAndPassword(dtoLogin.getUsername(), dtoLogin.getPassword());
-			if(findUser != null){
-				String message = "BERHASIL";
-				model.addAttribute("message", message);
-					session.setAttribute("loginOK", findUser);
-					session.setMaxInactiveInterval(30 * 60);
-					return "index";
-			} else {
+			try {
+				LoginDto findUser = loginSvc.findByUsernameAndPassword(dtoLogin.getUsername(), dtoLogin.getPassword());
+				session.setAttribute("loginOK", findUser);
+				session.setMaxInactiveInterval(30 * 60);
+				return "redirect:/index/landing";
+			} catch (NullPointerException e) {
 				String message = "Username atau Password Salah.";
 				model.addAttribute("message", message);
+				return "login";
+			} catch (Exception e) {
+				model.addAttribute("message", "Something went wrong :(");
 				return "hello";
 			}
 		}
 	}
-	
-	
 
 }

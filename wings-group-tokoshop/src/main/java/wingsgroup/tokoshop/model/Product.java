@@ -34,6 +34,9 @@ public class Product implements Serializable {
 
 	@Column(name="Unit")
 	private String unit;
+	
+	@Column(name="Image")
+	private String image;
 
 	public Product() {
 	}
@@ -92,6 +95,14 @@ public class Product implements Serializable {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

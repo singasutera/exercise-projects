@@ -50,7 +50,7 @@ public class ProductSvcImpl implements ProductSvc {
 			dto.setProductCode(e.getProductCode());
 			dto.setProductName(e.getProductName());
 			dto.setUnit(e.getUnit());
-			
+			dto.setImage(e.getImage());
 			dtoList.add(dto);
 		}
 		return dtoList;
@@ -69,7 +69,7 @@ public class ProductSvcImpl implements ProductSvc {
 			dto.setProductCode(product.getProductCode());
 			dto.setProductName(product.getProductName());
 			dto.setUnit(product.getUnit());
-			
+			dto.setImage(product.getImage());
 			return dto;
 		}
 		return null;

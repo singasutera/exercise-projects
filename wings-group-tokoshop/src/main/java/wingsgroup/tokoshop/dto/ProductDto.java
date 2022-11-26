@@ -11,6 +11,7 @@ public class ProductDto {
 	private BigDecimal price;
 	private String productName;
 	private String unit;
+	private String image;
 	
 	public String getProductCode() {
 		return productCode;
@@ -53,6 +54,12 @@ public class ProductDto {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

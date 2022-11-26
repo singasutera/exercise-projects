@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@page import="wingsgroup.tokoshop.model.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+Login login = (Login) session.getAttribute("userattr");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,27 +23,29 @@
 			<div class="card-header text-center">
 				LOGIN
 				<div class="card-body">
-					<form action="${pageContext.request.contextPath}/user/checkLogin" method="POST" modelAttribute="userattr">
+					<form:form action="${pageContext.request.contextPath}/user/checkLogin"
+						method="POST" modelAttribute="userattr">
 
 						<div class="form-group">
-							<input type="text" class="form-control" name="username" path="user"
-								placeholder="Username" required>
+							<input type="text" class="form-control" name="username"
+							 placeholder="Username" required>
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" name="password" path="password"
-								placeholder="Password" required>
+							<input type="password" class="form-control" name="password"
+								 placeholder="Password" required>
 						</div>
 
 						<div class="text-center">
 							<button type="submit" class="btn btn-primary">LOGIN</button>
 						</div>
 
-					</form>
+					</form:form>
+					<div class="text-center">${message}</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<jsp:include page="template/footer.jsp" />
+	<jsp:include page="template/footer.jsp" />
 </body>
 <!-- <script> -->
 <!-- 	$(document).ready(function() { -->
