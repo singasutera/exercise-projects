@@ -8,6 +8,13 @@
 </head>
 <body>
 <jsp:include page="bootstrap/navbar.jsp" />
+
+<div class="container">
+<div class="d-flex py-3">TOTAL PRICE</div>
+
+</div>
+
+
 <jsp:include page="bootstrap/popperjs.jsp" />
 </body>
 </html>
